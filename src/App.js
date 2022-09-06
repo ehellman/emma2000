@@ -1,7 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
+import { useEffect } from 'react';
 
 function App() {
+  useEffect(() => {
+
+    fetch('http://localhost:8181/products', { credentials: 'include' })
+    .then(
+      response =>
+        response.ok
+          ? response.json()
+          : Promise.reject(`Cannot communicate with the mocked REST API server (${response.statusText})`),
+    )
+    .then(products => {
+      console.log('yaaaay', products)
+    })
+  
+  }, [])
   return (
     <div className="App">
       <header className="App-header">
